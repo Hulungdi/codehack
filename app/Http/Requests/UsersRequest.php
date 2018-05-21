@@ -23,12 +23,12 @@ class UsersRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'is_active' => 'required',
-            'role_id' => 'required'
-        ];
+//        return [
+//            'name' => 'required',
+//            'email' => 'required',
+//            'password' => 'required',
+//            'is_active' => 'required',
+//            'role_id' => 'required'
+//        ];
     }
 }

@@ -11,6 +11,9 @@
 |
 */
 
+use App\Photo;
+use App\User;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,3 +29,8 @@ Route::get('/admin', function(){
 });
 
 Route::resource('admin/users', 'AdminUsersController');
+
+Route::get('/test', function (){
+    $test = User::all();
+    echo $test;
+});

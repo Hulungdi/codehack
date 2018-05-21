@@ -30,7 +30,7 @@ class User extends Authenticatable
       
     }
 
-    public function photos() {
+    public function photo() {
 
         return $this->belongsTo('App\Photo');
 
