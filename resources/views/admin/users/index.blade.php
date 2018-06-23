@@ -6,6 +6,12 @@
 
 <h2>Users</h2>
 
+@if(Session::has('deleted_user'))
+    <p class="bg-danger">{{session('deleted_user')}}</p>
+@endif
+@if(Session::has('create_msg'))
+    <p class="bg-success">{{session('create_msg')}}</p>
+@endif
 <table class="table">
     <thead>
       <tr>
@@ -28,7 +34,7 @@
               <td><img src="{{$user->photo ? $user->photo->file : "No user photo"}}" width="70px" height="50px"></td>
               <td><a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a></td>
             <td>{{$user->email}}</td>
-            <td>{{$user->role->name}}</td>
+            <td>{{$user->role['name']}}</td>
             <th>{{$user->is_active==1 ? 'Active' : 'Not Active'}}</th>
             <td>{{$user->created_at->diffForHumans()}}</td>
             <td>{{$user->updated_at->diffForHumans()}}</td>

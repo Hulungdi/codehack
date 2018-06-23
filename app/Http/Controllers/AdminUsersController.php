@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
 use App\Role;
@@ -67,7 +68,7 @@ class AdminUsersController extends Controller
 
         }
         User::create($input);
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('create_msg', 'User created successfully');
     }
 
     /**
@@ -101,7 +102,7 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsersRequest $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
         $user = User::findOrfail($id);
 
@@ -125,7 +126,7 @@ class AdminUsersController extends Controller
         }
 
         $user->update($input);
-        return redirect('/admin/users/'.$id.'/edit');
+        return redirect('/admin/users/'.$id.'/edit')->with('edit_msg','User Successfully Updated');
     }
 
     /**
@@ -136,6 +137,11 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::findOrfail($id);
+        unlink(public_path() . $user->photo->file); //file path is set by the accessor in photo class
+        $user->delete();
+        return redirect('/admin/users')->with('deleted_user','Succefully deleted the user');
+
     }
 }

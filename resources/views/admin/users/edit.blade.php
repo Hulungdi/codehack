@@ -4,7 +4,9 @@
 @section('content')
 
     <h3>Edit Profile</h3>
-
+@if(Session::has('edit_msg'))
+    <p class="bg-primary">{{session('edit_msg')}}</p>
+@endif
     <div class="row">
         @include('includes.form_error.form_error')
     </div>
@@ -40,7 +42,18 @@
             {!!Form::file('photo_id', null, ['class'=>'form-control'])!!}
         </div>
 
-        {!!Form::submit('Update', ['class'=>'btn btn-primary'])!!}
+        {!!Form::submit('Update User', ['class'=>'btn btn-primary col-sm-6'])!!}
         {!!Form::close()!!}
+
+
+        {!!Form::open(['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id]])!!}
+            <div class="form-group">
+                {!!Form::submit('Delete User', ['class'=>'btn btn-danger col-sm-6'])!!}
+            </div>
+
+        {!!Form::close()!!}
+
+
+
     </div>
 @stop()
